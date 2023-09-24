@@ -4,14 +4,14 @@ from .serializers import AuthorSerializer, BookSerializer
 from rest_framework import viewsets, status
 from rest_framework.response import Response
 from rest_framework.decorators import action
-from .permissions import IsOwnerOrCreate, IsLoggedInPermission
+from .permissions import IsOwnerOrCreate
 from rest_framework.filters import SearchFilter, OrderingFilter
 from .filters import IsAuthorFilterBackend
 
 class BookViewSet(viewsets.ModelViewSet):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
-    permission_classes = [IsOwnerOrCreate, IsLoggedInPermission]
+    permission_classes = [IsOwnerOrCreate]
     filter_backends = [SearchFilter, OrderingFilter, IsAuthorFilterBackend]
     search_fields = ["title"]
 
